@@ -1,5 +1,4 @@
-﻿using Core.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -15,7 +14,7 @@ namespace AppTemplate.Net8.Database.Extensions
             modelBuilder.SetDatetimeUTC();
         }
 
-        public static void SetDatetimeUTC(this ModelBuilder modelBuilder)
+        private static void SetDatetimeUTC(this ModelBuilder modelBuilder)
         {
             var dateTimeConverter = new ValueConverter<DateTime, DateTime>(
                 v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
@@ -30,7 +29,7 @@ namespace AppTemplate.Net8.Database.Extensions
             }
         }
 
-        public static void DisableCascades(this ModelBuilder modelBuilder)
+        private static void DisableCascades(this ModelBuilder modelBuilder)
         {
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()
                    .SelectMany(t => t.GetForeignKeys())
@@ -42,13 +41,13 @@ namespace AppTemplate.Net8.Database.Extensions
             }
         }
 
-        public static void CreateIsActiveIndex(this ModelBuilder modelBuilder)
+        private static void CreateIsActiveIndex(this ModelBuilder modelBuilder)
         {
-            var types = GetTypes(modelBuilder, typeof(IDeactivatable));
+            var types = GetTypes(modelBuilder, typeof(AuditEntity));
             foreach (var type in types)
             {
                 modelBuilder.Entity(type.ClrType)
-                    .HasIndex(nameof(IDeactivatable.IsActive));
+                    .HasIndex(nameof(AuditEntity.IsActive));
             }
         }
 
@@ -58,7 +57,7 @@ namespace AppTemplate.Net8.Database.Extensions
                 .Where(t => (byInterface.IsAssignableFrom(t.ClrType)));
         }
 
-        public static void SetAuditDefaultValues(this ModelBuilder modelBuilder)
+        private static void SetAuditDefaultValues(this ModelBuilder modelBuilder)
         {
             var types = GetTypes(modelBuilder, typeof(IAuditEntity));
             foreach (var type in types)

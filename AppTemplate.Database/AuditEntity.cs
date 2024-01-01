@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Core.Database;
 
 namespace AppTemplate.Net8.Database
 {
@@ -15,7 +14,7 @@ namespace AppTemplate.Net8.Database
         public int UpdatedById { get; set; }
     }
 
-    public class AuditEntity : IDeactivatable, IAuditEntity
+    public class AuditEntity: IAuditEntity
     {
         [Key]
         public int Id { get; set; }
@@ -42,7 +41,6 @@ namespace AppTemplate.Net8.Database
         public static void Deactivate(this AuditEntity entity)
         {
             entity.IsActive = false;
-            entity.UpdatedOn = DateTime.UtcNow;
         }
     }
 }

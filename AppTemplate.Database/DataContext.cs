@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AppTemplate.Net8.Database;
 
-public class DataContext(DbContextOptions options, ICurrentUserLocator currentUserLocator)
+public class DataContext(DbContextOptions options, ICurrentUserLocator? currentUserLocator = null)
     : DbContext(options)
-{
+{  
     public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +30,9 @@ public class DataContext(DbContextOptions options, ICurrentUserLocator currentUs
 
     private void OnBeforeSaving()
     {
+        if (currentUserLocator == null)
+            throw new ApplicationException("CurrentUserLocator is not registered");
+        
         foreach (var change in ChangeTracker.Entries().ToList())
         {
             if (change is not { Entity: AuditEntity auditEntity }) 
