@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppTemplate.Net8.Database.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240101181348_Init")]
+    [Migration("20240101182606_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -33,7 +33,7 @@ namespace AppTemplate.Net8.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -42,12 +42,10 @@ namespace AppTemplate.Net8.Database.Migrations
                         .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -61,7 +59,6 @@ namespace AppTemplate.Net8.Database.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -89,15 +86,24 @@ namespace AppTemplate.Net8.Database.Migrations
                     b.HasIndex("Username");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            UpdatedById = 0,
+                            UpdatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Username = "System"
+                        });
                 });
 
             modelBuilder.Entity("AppTemplate.Net8.Database.User", b =>
                 {
                     b.HasOne("AppTemplate.Net8.Database.User", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.HasOne("AppTemplate.Net8.Database.User", "UpdatedBy")
                         .WithMany()

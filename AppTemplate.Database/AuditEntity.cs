@@ -7,7 +7,7 @@ namespace AppTemplate.Net8.Database
     {
         DateTime CreatedOn { get; set; }
         
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
 
         DateTime UpdatedOn { get; set; }
         
@@ -25,7 +25,7 @@ namespace AppTemplate.Net8.Database
 
         public DateTime UpdatedOn { get; set; }
         
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
 
         [ForeignKey(nameof(CreatedById))]
         public User CreatedBy { get; set; }

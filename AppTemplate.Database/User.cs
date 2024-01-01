@@ -9,15 +9,15 @@ namespace AppTemplate.Net8.Database
         public string Username { get; set; }
 
         [StringLength(50)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [StringLength(50)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         public string FullName { get; set; }
 
         [StringLength(200)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public static void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,14 @@ namespace AppTemplate.Net8.Database
 
             modelBuilder.Entity<User>().Property(p => p.FullName)
                 .HasComputedColumnSql($"CONCAT({nameof(FirstName)},' ', {nameof(LastName)})");
+
+            modelBuilder.Entity<User>().HasData([
+                new User { Id = KnownUsers.System, 
+                    Username = nameof(KnownUsers.System),
+                    //CreatedById = KnownUsers.System,
+                    IsActive = false
+                }
+            ]);
         }
     }
 
