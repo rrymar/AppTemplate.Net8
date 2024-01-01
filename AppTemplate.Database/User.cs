@@ -29,7 +29,7 @@ namespace AppTemplate.Net8.Database
             modelBuilder.Entity<User>().HasData([
                 new User { Id = KnownUsers.System, 
                     Username = nameof(KnownUsers.System),
-                    //CreatedById = KnownUsers.System,
+                    CreatedById = KnownUsers.System,
                     IsActive = false
                 }
             ]);
