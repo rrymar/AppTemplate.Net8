@@ -1,0 +1,6 @@
+@AppTemplate.Net8_HostAddress = http://localhost:5028
+
+GET {{AppTemplate.Net8_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
