@@ -28,7 +28,7 @@ namespace AppTemplate.Net8.Database
         public int? CreatedById { get; set; }
 
         [ForeignKey(nameof(CreatedById))]
-        public User CreatedBy { get; set; }
+        public User? CreatedBy { get; set; }
 
         public int UpdatedById { get; set; }
 
