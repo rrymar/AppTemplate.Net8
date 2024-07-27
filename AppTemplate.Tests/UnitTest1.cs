@@ -1,3 +1,5 @@
+using RestSharp;
+
 namespace AppTemplate.Net8.Tests;
 
 public class UnitTest1
