@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>AppTemplate.Net8.Database</RootNamespace>
+    <RootNamespace>AppTemplate.Database</RootNamespace>
 </PropertyGroup>
 
 <ItemGroup>

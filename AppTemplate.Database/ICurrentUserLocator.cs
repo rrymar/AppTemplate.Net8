@@ -1,4 +1,4 @@
-﻿namespace AppTemplate.Net8.Database
+﻿namespace AppTemplate.Database
 {
     public interface ICurrentUserLocator
     {

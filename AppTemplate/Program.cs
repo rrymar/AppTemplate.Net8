@@ -1,5 +1,6 @@
+using AppTemplate.Database;
 using AppTemplate.Net8.Database;
-using AppTemplate.Net8.Users;
+using AppTemplate.Users;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

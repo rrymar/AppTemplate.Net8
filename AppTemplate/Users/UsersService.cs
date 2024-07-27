@@ -1,7 +1,7 @@
-using AppTemplate.Net8.Database;
+using AppTemplate.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppTemplate.Net8.Users;
+namespace AppTemplate.Users;
 
 public class UsersService(DataContext dataContext)
 {

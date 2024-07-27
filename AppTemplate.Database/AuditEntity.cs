@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AppTemplate.Net8.Database
+namespace AppTemplate.Database
 {
     public interface IAuditEntity
     {

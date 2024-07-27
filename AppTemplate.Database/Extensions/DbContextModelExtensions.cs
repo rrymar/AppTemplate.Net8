@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace AppTemplate.Net8.Database.Extensions
+namespace AppTemplate.Database.Extensions
 {
     public static class DbContextModelExtensions
     {

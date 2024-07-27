@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppTemplate.Net8.Database
+namespace AppTemplate.Database
 {
     public class User : AuditEntity
     {

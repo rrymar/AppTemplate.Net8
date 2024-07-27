@@ -7,7 +7,7 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
-        <RootNamespace>AppTemplate.Net8.Tests</RootNamespace>
+        <RootNamespace>AppTemplate.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

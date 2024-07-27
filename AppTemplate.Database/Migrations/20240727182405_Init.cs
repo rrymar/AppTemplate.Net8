@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace AppTemplate.Net8.Database.Migrations
+namespace AppTemplate.Database.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration

@@ -1,7 +1,7 @@
-﻿using AppTemplate.Net8.Database.Extensions;
+﻿using AppTemplate.Database.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppTemplate.Net8.Database;
+namespace AppTemplate.Database;
 
 public class DataContext(DbContextOptions options, ICurrentUserLocator? currentUserLocator = null)
     : DbContext(options)

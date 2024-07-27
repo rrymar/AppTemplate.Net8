@@ -1,6 +1,6 @@
-using AppTemplate.Net8.Database;
+using AppTemplate.Database;
 
-namespace AppTemplate.Net8.Users;
+namespace AppTemplate.Users;
 
 public class CurrentUserLocator : ICurrentUserLocator
 {

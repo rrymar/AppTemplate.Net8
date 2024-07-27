@@ -1,4 +1,4 @@
-namespace AppTemplate.Net8.Users;
+namespace AppTemplate.Users;
 
 public class UserModel
 {

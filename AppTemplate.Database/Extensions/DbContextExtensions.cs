@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppTemplate.Net8.Database.Extensions
+namespace AppTemplate.Database.Extensions
 {
     public class Changes<TEntity, TModel>
     {
