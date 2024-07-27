@@ -1,5 +1,4 @@
 using AppTemplate.Database;
-using AppTemplate.Net8.Database;
 using AppTemplate.Users;
 using Microsoft.EntityFrameworkCore;
 
