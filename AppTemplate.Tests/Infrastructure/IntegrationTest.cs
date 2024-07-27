@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RestSharp;
 
 namespace AppTemplate.Tests.Infrastructure;
 
@@ -11,6 +12,8 @@ public abstract class IntegrationTest<TStartup,TDbContext>
     private readonly TestApplicationFactoryBase<TStartup,TDbContext> _factory;
 
     protected readonly TDbContext DataContext;
+
+    protected readonly RestClient ApiClient;
 
     protected readonly IServiceProvider Services;
 
@@ -24,8 +27,8 @@ public abstract class IntegrationTest<TStartup,TDbContext>
         _scope = factory.Services.CreateScope();
         Services = _scope.ServiceProvider;
 
-        DataContext = _scope.ServiceProvider.GetRequiredService<TDbContext>();
-
+        DataContext = Services.GetRequiredService<TDbContext>();
+        ApiClient = Services.GetRequiredService<RestClient>();
     }
 
     public virtual void Dispose()

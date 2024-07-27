@@ -38,5 +38,6 @@ using (var scope = app.Services.CreateScope())
 
 app.Run();
 
+// required for integration testing
 public partial class Program { }
 

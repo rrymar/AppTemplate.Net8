@@ -1,3 +1,4 @@
+using System.Reflection;
 using AppTemplate.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -8,34 +9,25 @@ using RestSharp;
 
 namespace AppTemplate.Tests.Infrastructure;
 
-public class TestApplicationFactory: TestApplicationFactoryBase<Program,DataContext>;
+public class TestApplicationFactory : TestApplicationFactoryBase<Program, DataContext>;
 
 public abstract class TestApplicationFactoryBase<TStartup,TDbContext> : WebApplicationFactory<TStartup>
     where TDbContext : DbContext
     where TStartup : class
 {
-    // public IHttpClient CreateTestClient()
-    // {
-    //     return new TestingHttpClient(CreateClient());
-    // }
-
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         base.ConfigureWebHost(builder);
-
-       // var projectDir = Directory.GetCurrentDirectory();
-       // var configPath = Path.Combine(projectDir, "appsettings.json");
-
-       //builder.ConfigureAppConfiguration((_, c) => c.AddJsonFile(configPath));
-
-        builder.ConfigureTestServices(s =>
-        {
-            ConfigureTestServices(s);
-        });
+        builder.UseEnvironment("Tests");
+        builder.ConfigureTestServices(ConfigureTestServices);
     }
 
     protected virtual void ConfigureTestServices(IServiceCollection services)
     {
         services.AddScoped(_ => new RestClient(CreateClient()));
+        
+        var serviceTypes = GetType().Assembly.GetTypes()
+            .Where(t => t.Name.EndsWith("TestService")).ToList();
+        serviceTypes.ForEach(s => services.AddScoped(s));
     }
 }
