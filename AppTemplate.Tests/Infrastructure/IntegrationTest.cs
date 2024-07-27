@@ -4,21 +4,19 @@ using Microsoft.Extensions.DependencyInjection;
 namespace AppTemplate.Tests.Infrastructure;
 
 [AutoRollback]
-public abstract class IntegrationTest<TDbContex, TStartup>
-    where TDbContex : DbContext
+public abstract class IntegrationTest<TStartup,TDbContext>
+    where TDbContext : DbContext
     where TStartup : class
 {
-    private readonly TestApplicationFactory<TStartup,TDbContex> _factory;
+    private readonly TestApplicationFactoryBase<TStartup,TDbContext> _factory;
 
-    protected virtual bool CreateTransaction => false;
-
-    protected readonly TDbContex DataContext;
+    protected readonly TDbContext DataContext;
 
     protected readonly IServiceProvider Services;
 
     private readonly IServiceScope _scope;
 
-    protected IntegrationTest(TestApplicationFactory<TStartup, TDbContex> factory)
+    protected IntegrationTest(TestApplicationFactoryBase<TStartup, TDbContext> factory)
     {
         _factory = factory;
         factory.Server.PreserveExecutionContext = true;
@@ -26,7 +24,7 @@ public abstract class IntegrationTest<TDbContex, TStartup>
         _scope = factory.Services.CreateScope();
         Services = _scope.ServiceProvider;
 
-        DataContext = _scope.ServiceProvider.GetRequiredService<TDbContex>();
+        DataContext = _scope.ServiceProvider.GetRequiredService<TDbContext>();
 
     }
 

@@ -1,12 +1,16 @@
+using AppTemplate.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RestSharp;
 
 namespace AppTemplate.Tests.Infrastructure;
 
-public class TestApplicationFactory<TStartup,TDbContext> : WebApplicationFactory<TStartup>
+public class TestApplicationFactory: TestApplicationFactoryBase<Program,DataContext>;
+
+public abstract class TestApplicationFactoryBase<TStartup,TDbContext> : WebApplicationFactory<TStartup>
     where TDbContext : DbContext
     where TStartup : class
 {
@@ -32,5 +36,6 @@ public class TestApplicationFactory<TStartup,TDbContext> : WebApplicationFactory
 
     protected virtual void ConfigureTestServices(IServiceCollection services)
     {
+        services.AddScoped(_ => new RestClient(CreateClient()));
     }
 }
