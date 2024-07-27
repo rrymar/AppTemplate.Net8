@@ -2,24 +2,10 @@
 
 namespace AppTemplate.Tests.Infrastructure
 {
-    public interface ICrudTestService<TModel, TId>
-    {
-        string Url { get; }
-
-        TModel Create(TModel model);
-
-        TModel Get(TId id);
-
-        TModel Update(TId id, TModel model);
-
-        void Delete(TId id);
-    }
-    
     public abstract class CrudTestService<TModel>(RestClient client) 
         : CrudTestService<TModel, int>(client);
 
-    public abstract class CrudTestService<TModel, TId>(RestClient client) 
-        : ICrudTestService<TModel, TId>
+    public abstract class CrudTestService<TModel, TId>(RestClient client)
     {
         public abstract string Url { get; }
 

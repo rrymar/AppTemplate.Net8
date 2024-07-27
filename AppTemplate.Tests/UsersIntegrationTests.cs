@@ -1,3 +1,4 @@
+using AppTemplate.Database;
 using AppTemplate.Tests.Infrastructure;
 using AppTemplate.Tests.TestServices;
 using AppTemplate.Users;
@@ -37,7 +38,7 @@ public class UsersIntegrationTests : AppTemplateIntegrationTests
     [Fact]
     public void ItReturnsUser()
     {
-        var user = _usersTestService.Get(1);
+        var user = _usersTestService.Get(KnownUsers.System);
         user.Should().NotBeNull();
     }
 }
