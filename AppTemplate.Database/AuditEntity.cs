@@ -7,11 +7,11 @@ namespace AppTemplate.Net8.Database
     {
         DateTime CreatedOn { get; set; }
         
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
 
         DateTime UpdatedOn { get; set; }
         
-        public int UpdatedById { get; set; }
+        public int? UpdatedById { get; set; }
     }
 
     public class AuditEntity: IAuditEntity
@@ -25,12 +25,12 @@ namespace AppTemplate.Net8.Database
 
         public DateTime UpdatedOn { get; set; }
         
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
 
         [ForeignKey(nameof(CreatedById))]
         public User CreatedBy { get; set; }
 
-        public int UpdatedById { get; set; }
+        public int? UpdatedById { get; set; }
 
         [ForeignKey(nameof(UpdatedById))]
         public User UpdatedBy { get; set; }

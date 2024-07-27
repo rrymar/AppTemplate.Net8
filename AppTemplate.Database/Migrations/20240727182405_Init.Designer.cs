@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppTemplate.Net8.Database.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240101182703_Init")]
+    [Migration("20240727182405_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -62,7 +62,7 @@ namespace AppTemplate.Net8.Database.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("UpdatedById")
+                    b.Property<int?>("UpdatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedOn")
@@ -91,9 +91,9 @@ namespace AppTemplate.Net8.Database.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedById = 1,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = false,
-                            UpdatedById = 0,
                             UpdatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "System"
                         });
@@ -107,9 +107,7 @@ namespace AppTemplate.Net8.Database.Migrations
 
                     b.HasOne("AppTemplate.Net8.Database.User", "UpdatedBy")
                         .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("UpdatedById");
 
                     b.Navigation("CreatedBy");
 

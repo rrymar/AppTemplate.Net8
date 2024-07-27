@@ -26,7 +26,7 @@ namespace AppTemplate.Net8.Database.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     CreatedById = table.Column<int>(type: "int", nullable: true),
-                    UpdatedById = table.Column<int>(type: "int", nullable: false)
+                    UpdatedById = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,14 +40,13 @@ namespace AppTemplate.Net8.Database.Migrations
                         name: "FK_Users_Users_UpdatedById",
                         column: x => x.UpdatedById,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreatedById", "Email", "FirstName", "IsActive", "LastName", "UpdatedById", "Username" },
-                values: new object[] { 1, null, null, null, false, null, 0, "System" });
+                values: new object[] { 1, 1, null, null, false, null, null, "System" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_CreatedById",
